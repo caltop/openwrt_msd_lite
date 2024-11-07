@@ -4,19 +4,10 @@
  */
 
 'use strict';
-'require dom';
 'require fs';
 'require poll';
-'require rpc'
 'require uci';
-'require ui';
 'require view';
-
-var getStat = rpc.declare({
-	object: 'luci.msd_lite',
-	method: 'stat',
-	expect: {  },
-});
 
 return view.extend({
 	retrieveStatus: async function() {
@@ -26,11 +17,11 @@ return view.extend({
 			var url = `http://${address[0]}/stat`;
 
 			if(enabled == 0) {
-				return { value: 'msd lite is disabled.', rows:25 };
+				return { value: 'msd lite is disabled.', rows: 25 };
 			}
 
 			return fs.exec_direct('/usr/bin/wget', [ '-q', url, '-O', '-' ]).then(str => {
-				return { value: str, rows: str.split(/\r\n|\r|\n/).length};
+				return { value: str, rows: str.split(/\r\n|\r|\n/).length };
 			});
 		});
 	},
@@ -52,7 +43,7 @@ return view.extend({
 	render: function(status) {
 		return E([], [
 			E('div', { 'id': 'content_status' }, [
-				E('div', {'style': 'padding-bottom: 20px'}),
+				E('div', { 'style': 'padding-bottom: 20px' }),
 				E('textarea', {
 					'id': 'status',
 					'style': 'width: 100% !important; padding: 5px; font-family: monospace',
@@ -60,7 +51,7 @@ return view.extend({
 					'wrap': 'off',
 					'rows': status.rows,
 				}, [ status.value ]),
-				E('div', {'style': 'padding-bottom: 20px'})
+				E('div', { 'style': 'padding-bottom: 20px' })
 			])
 		]);
 	},
