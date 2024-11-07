@@ -5,11 +5,6 @@
 			"file": {
 				"/usr/bin/wget": [ "exec" ]
 			},
-			"ubus": {
-				"luci.msd_lite": [
-						"stat"
-				]
-			},
 			"uci": [ "msd_lite" ]
 		},
 		"write": {
